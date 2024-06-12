@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    `maven-publish`
 }
 
 android {
@@ -26,6 +27,21 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            groupId = "uz.cdti" // Replace with your group ID
+            artifactId = "logger" // Replace with your artifact ID
+            version = "1.0.0" // Replace with your version
+            artifact("$projectDir/build/outputs/aar/AppLogger-release.aar")
+        }
+    }
+
+    repositories {
+        mavenLocal()
     }
 }
 
